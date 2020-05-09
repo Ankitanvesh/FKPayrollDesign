@@ -8,6 +8,7 @@ import java.io.*;
 interface Employee{
   void Update();
   void updateSalary(int a,String b);
+  double getSalary();
   
 }
 
@@ -50,6 +51,10 @@ public class HourlyEmployee implements Employee  {
          System.out.println("Inconsistent data received Kindly try again");
        }  
     }
+
+    public double getSalary(){
+      return this.salaryToBePaid; 
+    }
     
      public static void main(String[] args) {
         HourlyEmployee hr= new HourlyEmployee(5.0);
@@ -58,6 +63,6 @@ public class HourlyEmployee implements Employee  {
         //hr.DailyUpdate();
         String s="abcd";
         hr.updateSalary(4, s);
-        System.out.println(hr.hourlyRate + "  "+ hr.salaryToBePaid);
+        System.out.println(hr.hourlyRate + "  "+ hr.getSalary());
     }
 }
