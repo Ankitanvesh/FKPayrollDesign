@@ -2,40 +2,62 @@ package learnJava;
 import java.util.*;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
+import java.io.*;
+//import Employee.java;
+
+interface Employee{
+  void Update();
+  void updateSalary(int a,String b);
+  
+}
 
 
- class HourlyEmployee {
-    private double hourly_rate;
-    private int hoursWorkedDuringDay;
+public class HourlyEmployee implements Employee  {
+    private double hourlyRate;
+    private double salaryToBePaid;
+    private boolean isUnionMember;
+    private double unionDues;
+   // private int hoursWorkedDuringDay;
     
-    HourlyEmployee(double hourly_rate){
-        hoursWorkedDuringDay=0;
-        this.hourly_rate= hourly_rate;
+    HourlyEmployee(double hourlyRate){
+        //hoursWorkedDuringDay=0;
+        this.hourlyRate= hourlyRate;
+        this.isUnionMember= false;
+        this.unionDues= 0.0;
     }
-    void HourlyUpdate(){
-        hoursWorkedDuringDay++;
+     
+    public void Update(){
+       salaryToBePaid=0.0;
+       
     }
-    int getHoursWorkedDuringDay(){
-        
-      return this.hoursWorkedDuringDay;  
+    
+    public void updateSalary(int hoursWorkedDuringDay,String dated ){
+       if(hoursWorkedDuringDay>8 && hoursWorkedDuringDay<24){
+        double extraHours= (double)hoursWorkedDuringDay -(double)8.0 ;
+        double normalHours = 8.0;
+        double normalPay =  (double)(normalHours * (double)hourlyRate);
+        double xtraRate = (double)(1.5* extraHours);
+        double xtraPay = (double)(extraHours * xtraRate);
+        salaryToBePaid = salaryToBePaid + normalPay + xtraPay;
+         
+       }
+       else if(hoursWorkedDuringDay<8 && hoursWorkedDuringDay>=0){
+        double normalHours = (double)hoursWorkedDuringDay;
+        double normalPay =  (double)(normalHours * (double)hourlyRate);
+        salaryToBePaid = salaryToBePaid + normalPay;
+       }
+       else{
+         System.out.println("Inconsistent data received Kindly try again");
+       }  
     }
-    String getDate(){
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-        LocalDateTime now = LocalDateTime.now();
-        String s=dtf.format(now);
-        return s;
-    } 
-    void DailyUpdate(){
-      this.getHoursWorkedDuringDay();
-      System.out.println("Before hours "+ hoursWorkedDuringDay);
-      this.hoursWorkedDuringDay=0;
-      System.out.println("Before hours "+ hoursWorkedDuringDay);  
-    }
-
+    
      public static void main(String[] args) {
         HourlyEmployee hr= new HourlyEmployee(5.0);
-        hr.HourlyUpdate();
-        System.out.println("hours "+ hr.hoursWorkedDuringDay);
-        hr.DailyUpdate();
+        //hr.HourlyUpdate();
+       // System.out.println("hours "+ hr.hoursWorkedDuringDay);
+        //hr.DailyUpdate();
+        String s="abcd";
+        hr.updateSalary(4, s);
+        System.out.println(hr.hourlyRate + "  "+ hr.salaryToBePaid);
     }
 }
