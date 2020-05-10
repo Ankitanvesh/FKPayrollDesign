@@ -95,7 +95,7 @@ public class NewEmployee {
         System.out.println(".");
 
 
-        filename=this.name + this.iD+ ".json";
+        filename=this.name + ".json";
 
 
         File file = new File("/home/ankit/Desktop/Flipkart/FKPayrollDesign/DataBase/"+filename);
