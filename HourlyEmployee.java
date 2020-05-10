@@ -12,13 +12,34 @@ public class HourlyEmployee implements Employee  {
     private double salaryToBePaid;
     private boolean isUnionMember;
     private double unionDues;
+    private boolean payToPostalAddress;
+    private boolean payToPaymaster;
+    private boolean payToBankAccount;
    // private int hoursWorkedDuringDay;
     
-    HourlyEmployee(double hourlyRate){
+    HourlyEmployee(double hourlyRate,int payType){
         //hoursWorkedDuringDay=0;
         this.hourlyRate= hourlyRate;
         this.isUnionMember= false;
         this.unionDues= 0.0;
+        this.payToBankAccount=false;
+        this.payToPaymaster=false;
+        this.payToPostalAddress=false;
+        if(payType==1){
+          this.payToPostalAddress=true;
+        }
+        else if(payType==2){
+          this.payToPaymaster=true;
+        }
+        else if(payType==3){
+          this.payToBankAccount=true;
+        }
+        else{
+          System.out.println("Invalid type specified");
+          System.out.println("Momentarily pay to postal address will be the default mode of payment");
+          System.out.println("You Can change the mode later");
+          this.payToPostalAddress=true;
+        }
     }
      
     public void Update(){
@@ -51,7 +72,7 @@ public class HourlyEmployee implements Employee  {
     }
     
      public static void main(String[] args) {
-        HourlyEmployee hr= new HourlyEmployee(5.0);
+        HourlyEmployee hr= new HourlyEmployee(5.0,1);
         //hr.HourlyUpdate();
        // System.out.println("hours "+ hr.hoursWorkedDuringDay);
         //hr.DailyUpdate();
