@@ -8,6 +8,9 @@ import java.io.*;
 interface Employee{
   void Update();
   void updateSalary(int a,String b);
+  void setUnionMembership();
+  void unionWeeklyDeduction();
+  void unionServiceChargeDeduction(double serviceCharge);  
   double getSalary();
   
 }
