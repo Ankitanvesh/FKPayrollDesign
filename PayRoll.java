@@ -5,12 +5,10 @@ import java.time.LocalDateTime;
 import java.io.*;
 
 public class PayRoll {
-    private int employeeType;
     private Employee obj;
     private double salaryTobePaid;
-    PayRoll(Employee obj,int employeeType){
+    PayRoll(Employee obj){
         this.obj=obj;
-        this.employeeType = employeeType;
     }  
 
     String generatePay(){
