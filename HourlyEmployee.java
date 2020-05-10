@@ -12,6 +12,7 @@ public class HourlyEmployee implements Employee  {
     private double salaryToBePaid;
     private boolean isUnionMember;
     private double unionDues;
+    private double currDues;
     private boolean payToPostalAddress;
     private boolean payToPaymaster;
     private boolean payToBankAccount;
@@ -25,6 +26,7 @@ public class HourlyEmployee implements Employee  {
         this.payToBankAccount=false;
         this.payToPaymaster=false;
         this.payToPostalAddress=false;
+        this.currDues=0.0;
         if(payType==1){
           this.payToPostalAddress=true;
         }
@@ -41,6 +43,17 @@ public class HourlyEmployee implements Employee  {
           this.payToPostalAddress=true;
         }
     }
+
+    public void setUnionMembership(){
+      this.isUnionMember=true;
+    }
+
+    public void unionWeeklyDeduction(){
+      currDues = currDues + unionDues;
+    }
+    public void unionServiceChargeDeduction(double serviceCharge){
+      currDues = currDues + serviceCharge;
+    }
      
     public void Update(){
        salaryToBePaid=0.0;
@@ -55,7 +68,14 @@ public class HourlyEmployee implements Employee  {
         double xtraRate = (double)(1.5* extraHours);
         double xtraPay = (double)(extraHours * xtraRate);
         salaryToBePaid = salaryToBePaid + normalPay + xtraPay;
-         
+        salaryToBePaid = salaryToBePaid - currDues;
+        if(salaryToBePaid<0){
+          currDues = (-1.0 * salaryToBePaid);
+          salaryToBePaid=0.0;
+        }
+        else{
+          currDues=0.0;
+        } 
        }
        else if(hoursWorkedDuringDay<8 && hoursWorkedDuringDay>=0){
         double normalHours = (double)hoursWorkedDuringDay;

@@ -18,6 +18,7 @@ public class FlatSalaryEmployee implements Employee{
     private boolean payToPostalAddress;
     private boolean payToPaymaster;
     private boolean payToBankAccount;
+    private double currDues;
 
     FlatSalaryEmployee(double monthlySalary,boolean isSalesEmployee,double commisionRate,int payType){
         this.monthlySalary=monthlySalary;
@@ -29,6 +30,7 @@ public class FlatSalaryEmployee implements Employee{
         this.payToBankAccount=false;
         this.payToPaymaster=false;
         this.payToPostalAddress=false;
+        this.currDues=0.0;
         if(payType==1){
           this.payToPostalAddress=true;
         }
@@ -47,6 +49,17 @@ public class FlatSalaryEmployee implements Employee{
 
     }
 
+    public void setUnionMembership(){
+        this.isUnionMember=true;
+      }
+  
+     public void unionWeeklyDeduction(){
+        currDues = currDues + unionDues;
+      }
+      public void unionServiceChargeDeduction(double serviceCharge){
+        currDues = currDues + serviceCharge;
+      }
+
     public void Update(){
         xtraSalaryToBePaid=0.0;    
      }
@@ -54,7 +67,8 @@ public class FlatSalaryEmployee implements Employee{
      public void updateSalary(int salescount, String dated){
          if(salescount>0 && isSalesEmployee==true){
             double xtraSalary = (double)((double)salescount * commisionRate);
-            xtraSalaryToBePaid = xtraSalaryToBePaid + xtraSalary;  
+            xtraSalaryToBePaid = xtraSalaryToBePaid + xtraSalary; 
+            
         }
         else if(salescount>0 && isSalesEmployee==false){
             System.out.println("Inconsistent action detected. This feature can be used only by Sales employees Kindly ");
@@ -65,7 +79,14 @@ public class FlatSalaryEmployee implements Employee{
                 
      }
      public double getSalary(){
-          this.salaryToBePaid = monthlySalary + xtraSalaryToBePaid;
+          this.salaryToBePaid = monthlySalary + xtraSalaryToBePaid - currDues;
+          if(this.salaryToBePaid<0){
+              currDues = (-1.0 * this.salaryToBePaid);
+              this.salaryToBePaid=0;
+          }
+          else{
+              currDues=0;
+          }
           return this.salaryToBePaid;
      }
 
