@@ -1,14 +1,16 @@
 package learnJava;
 import java.util.*;
+
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 import java.io.*;
 
-class Database{
-    public static Map<Integer,Employee> database = new HashMap<Integer,Employee>();
-    public static int id=1;
-}
+
 public class Home {
+    private static int Id;
+    public static Map<Integer,Employee> database = new HashMap<Integer,Employee>();
+    public static Map<Integer,Employee> empType = new HashMap<Integer,Employee>();
+    public static int id=1;
     public static void main(String[] args) {
         System.out.println("Welcome to FK's payroll application");
         System.out.println("We can assign you in one of the following ways");
@@ -24,7 +26,10 @@ public class Home {
 		// String input 
         int reply = sc.nextInt();
         if(reply==1){
-
+             NewEmployee newEmployee = new NewEmployee();
+             id++;
+             Id=id;
+             newEmployee.call(Id);   
         }
     }
 }
