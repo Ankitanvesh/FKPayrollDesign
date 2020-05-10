@@ -12,7 +12,7 @@ public class Home {
     private static int Id;
     public static Map<Integer,Employee> empType = new HashMap<Integer,Employee>();
     public static int id=1;
-
+    public String name;
 
 
     public static void main(String[] args) {
@@ -35,6 +35,11 @@ public class Home {
              System.out.println(id);
              Id=id;
              newEmployee.call(Id);   
+        }
+        if(reply==2){
+            DeleteEmployee delEmployee = new DeleteEmployee();
+            
+            delEmployee.exec();
         }
         
     }
