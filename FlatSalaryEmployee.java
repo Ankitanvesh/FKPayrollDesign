@@ -20,7 +20,7 @@ public class FlatSalaryEmployee implements Employee{
     private boolean payToBankAccount;
     private double currDues;
 
-    FlatSalaryEmployee(double monthlySalary,boolean isSalesEmployee,double commisionRate,int payType){
+    FlatSalaryEmployee(double monthlySalary,boolean isSalesEmployee,double commisionRate,int payType,double salaryToBePaid,double unionDues){
         this.monthlySalary=monthlySalary;
         this.isSalesEmployee=isSalesEmployee;
         this.commisionRate = commisionRate;
@@ -30,7 +30,9 @@ public class FlatSalaryEmployee implements Employee{
         this.payToBankAccount=false;
         this.payToPaymaster=false;
         this.payToPostalAddress=false;
-        this.currDues=0.0;
+        this.unionDues=currDues;
+        this.salaryToBePaid=salaryToBePaid;
+
         if(payType==1){
           this.payToPostalAddress=true;
         }
@@ -40,61 +42,67 @@ public class FlatSalaryEmployee implements Employee{
         else if(payType==3){
           this.payToBankAccount=true;
         }
-        else{
-          System.out.println("Invalid type specified");
-          System.out.println("Momentarily pay to postal address will be the default mode of payment");
-          System.out.println("You Can change the mode later");
-          this.payToPostalAddress=true;
-        }
+       
 
     }
 
+    public void unionWeeklyDeduction(double currDues){
+      this.currDues=currDues;
+      this.currDues = this.currDues + unionDues;
+    }
+    public double getCurrDues(){
+      return this.currDues;
+    }
+    public void unionServiceChargeDeduction(double currDues,double serviceCharge){
+      this.currDues=currDues;
+      this.currDues = this.currDues + serviceCharge;
+    }
+     
     public void setUnionMembership(){
         this.isUnionMember=true;
       }
-  
-     public void unionWeeklyDeduction(){
-        currDues = currDues + unionDues;
-      }
-      public void unionServiceChargeDeduction(double serviceCharge){
-        currDues = currDues + serviceCharge;
-      }
+      
 
     public void Update(){
         xtraSalaryToBePaid=0.0;    
      }
 
-     public void updateSalary(int salescount, String dated){
-         if(salescount>0 && isSalesEmployee==true){
-            double xtraSalary = (double)((double)salescount * commisionRate);
-            xtraSalaryToBePaid = xtraSalaryToBePaid + xtraSalary; 
+     public void updateSalary(int salescount, String dated,double salaryToBe,double xtraSalaryPay){
+        this.salaryToBePaid=salaryToBe;
+        //this.currDues= currDue;
+        xtraSalaryToBePaid=xtraSalaryPay;
+          double xtraSalary = (double)((double)salescount * commisionRate);
+          xtraSalaryToBePaid = xtraSalaryToBePaid + xtraSalary; 
             
-        }
-        else if(salescount>0 && isSalesEmployee==false){
-            System.out.println("Inconsistent action detected. This feature can be used only by Sales employees Kindly ");
-        }
-        else if(salescount<0){
-            System.out.println("Inconsistent sale count detected. Enter consistent information and try again");
-        }
                 
      }
-     public double getSalary(){
-          this.salaryToBePaid = monthlySalary + xtraSalaryToBePaid - currDues;
-          if(this.salaryToBePaid<0){
-              currDues = (-1.0 * this.salaryToBePaid);
-              this.salaryToBePaid=0;
-          }
-          else{
-              currDues=0;
-          }
+
+     public double getWeeklySalary(double xtraSalaryPay,double currDue){
+      xtraSalaryToBePaid = xtraSalaryPay;
+      currDues=currDue;
+      this.salaryToBePaid = xtraSalaryToBePaid - currDues;
+      if(this.salaryToBePaid<0){
+          currDues = (-1.0 * this.salaryToBePaid);
+          this.salaryToBePaid=0;
+      }
+      else{
+          currDues=0;
+      }
+      return this.salaryToBePaid;
+     }
+
+     public double getSalary(double salaryToBePaid){
+       this.salaryToBePaid =salaryToBePaid-this.currDues;
+        
           return this.salaryToBePaid;
      }
 
      public static void main(String[] args) {
-        FlatSalaryEmployee fat = new FlatSalaryEmployee(2.0,true,4.0,1);
+       /*  FlatSalaryEmployee fat = new FlatSalaryEmployee(2.0,true,4.0,1);
         String s="abcd";
-        fat.updateSalary(4, s);
-        System.out.println( "  "+ fat.getSalary());
+        /* fat.updateSalary(4, s); */
+        //System.out.println( "  "+ fat.getSalary());
+         
     }
 
     

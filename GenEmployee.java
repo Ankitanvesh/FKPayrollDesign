@@ -7,11 +7,12 @@ import java.io.*;
 
 interface Employee{
   void Update();
-  void updateSalary(int a,String b);
+  void updateSalary(int a,String b,double c,double d);
   void setUnionMembership();
-  void unionWeeklyDeduction();
-  void unionServiceChargeDeduction(double serviceCharge);  
-  double getSalary();
+  void unionWeeklyDeduction(double a);
+  double getCurrDues();
+  void unionServiceChargeDeduction(double a,double serviceCharge);  
+  double getSalary(double a);
   
 }
 

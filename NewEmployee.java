@@ -8,25 +8,27 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject; 
 
 
-class Utili{
+/* class Utili{
     public static Map<String,Employee> database = new HashMap<String,Employee>();
     
-}
+} */
 
 public class NewEmployee {
     private String name;
     private int empType;
     private String postalAddress;
     private String bankAccountDetails;
-    public Employee employee;
     private String payStatement;
     private int iD;
     private String filename;
-    private double commisionRate;
-    private double hourlyRate;
-    private double monthlySalary;
-    private boolean isSalesEmployee;
+    private double commisionRate=0.0;
+    private double hourlyRate=0.0;
+    private double monthlySalary=0.0;
+    private boolean isSalesEmployee=false;
     private int payType;
+    private double salaryToBePaid=0.0;
+    private boolean isUnionMember=false;
+    private double unionDues=0.0;
      
 
 
@@ -57,8 +59,7 @@ public class NewEmployee {
             sc.nextLine();
              
             
-        this.employee = new HourlyEmployee(this.hourlyRate,this.payType); 
-            Utili.database.put(this.name,this.employee);
+           
         }
 
 
@@ -73,12 +74,10 @@ public class NewEmployee {
             isSalesEmployee=false;
             if(comma==1){
                 isSalesEmployee=true;
-                System.out.println("Enter monthly rate of employee");
-                this.monthlySalary=sc.nextDouble();
+                System.out.println("Enter commision rate of employee");
+                this.commisionRate=sc.nextDouble();
                 sc.nextLine();
             }
-            this.employee = new FlatSalaryEmployee(this.monthlySalary,this.isSalesEmployee,this.commisionRate,this.payType);
-            Utili.database.put(this.name,this.employee);   
         }
         System.out.println("Enter your postal address ");
         this.postalAddress = sc.nextLine();
@@ -94,11 +93,15 @@ public class NewEmployee {
         System.out.println(".");
         System.out.println(".");
 
+        if(empType==1)
+        filename="DataBase/";
+        else
+        filename="DataBase2/";
+        filename=filename+this.name + ".json";
 
-        filename=this.name + ".json";
 
 
-        File file = new File("/home/ankit/Desktop/Flipkart/FKPayrollDesign/DataBase/"+filename);
+        File file = new File("/home/ankit/Desktop/Flipkart/FKPayrollDesign/"+filename);
         try {if (file.createNewFile()) {
             System.out.println("Employee Added to FK"+file.getName());
           }
@@ -117,10 +120,19 @@ public class NewEmployee {
         jo.put("BankAccountDetails",this.bankAccountDetails);
         jo.put("UnionJoiningDate","");
         jo.put("PayStatement","");
+        jo.put("SalaryToBePaid",this.salaryToBePaid);
+        jo.put("UnionDues",this.unionDues);
+        jo.put("isSalesEmployee",this.isSalesEmployee);
+        jo.put("MonthlySalary",this.monthlySalary);
+        jo.put("HourlySalary",this.hourlyRate);
+        jo.put("CommisionRate",this.commisionRate);
+
+        
+
         
         
         try{
-            PrintWriter pw = new PrintWriter("/home/ankit/Desktop/Flipkart/FKPayrollDesign/DataBase/"+filename);
+            PrintWriter pw = new PrintWriter("/home/ankit/Desktop/Flipkart/FKPayrollDesign/"+filename);
             pw.write(jo.toJSONString());
             pw.flush(); 
             pw.close(); 
@@ -128,10 +140,6 @@ public class NewEmployee {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
-        for (Map.Entry<String,Employee> entry : Utili.database.entrySet()) {
-            System.out.println("Key = " + entry.getKey()); 
-        } 
-          
         
 
 

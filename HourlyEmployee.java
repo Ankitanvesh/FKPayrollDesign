@@ -18,7 +18,7 @@ public class HourlyEmployee implements Employee  {
     private boolean payToBankAccount;
    // private int hoursWorkedDuringDay;
     
-    HourlyEmployee(double hourlyRate,int payType){
+    HourlyEmployee(double hourlyRate,int payType,int salaryToBePaid,int unionDues){
         //hoursWorkedDuringDay=0;
         this.hourlyRate= hourlyRate;
         this.isUnionMember= false;
@@ -27,6 +27,8 @@ public class HourlyEmployee implements Employee  {
         this.payToPaymaster=false;
         this.payToPostalAddress=false;
         this.currDues=0.0;
+        this.salaryToBePaid=salaryToBePaid;
+        this.unionDues=unionDues; 
         if(payType==1){
           this.payToPostalAddress=true;
         }
@@ -36,23 +38,23 @@ public class HourlyEmployee implements Employee  {
         else if(payType==3){
           this.payToBankAccount=true;
         }
-        else{
-          System.out.println("Invalid type specified");
-          System.out.println("Momentarily pay to postal address will be the default mode of payment");
-          System.out.println("You Can change the mode later");
-          this.payToPostalAddress=true;
-        }
+        
     }
 
     public void setUnionMembership(){
       this.isUnionMember=true;
     }
 
-    public void unionWeeklyDeduction(){
-      currDues = currDues + unionDues;
+    public void unionWeeklyDeduction(double currDues){
+      this.currDues=currDues;
+      this.currDues = this.currDues + unionDues;
     }
-    public void unionServiceChargeDeduction(double serviceCharge){
-      currDues = currDues + serviceCharge;
+    public double getCurrDues(){
+      return this.currDues;
+    }
+    public void unionServiceChargeDeduction(double currDues,double serviceCharge){
+      this.currDues=currDues;
+      this.currDues = this.currDues + serviceCharge;
     }
      
     public void Update(){
@@ -60,7 +62,9 @@ public class HourlyEmployee implements Employee  {
        
     }
     
-    public void updateSalary(int hoursWorkedDuringDay,String dated ){
+    public void updateSalary(int hoursWorkedDuringDay,String dated,double salaryToBe,double currDue ){
+        this.salaryToBePaid=salaryToBe;
+        this.currDues= currDue;
        if(hoursWorkedDuringDay>8 && hoursWorkedDuringDay<24){
         double extraHours= (double)hoursWorkedDuringDay -(double)8.0 ;
         double normalHours = 8.0;
@@ -81,14 +85,12 @@ public class HourlyEmployee implements Employee  {
         double normalHours = (double)hoursWorkedDuringDay;
         double normalPay =  (double)(normalHours * (double)hourlyRate);
         salaryToBePaid = salaryToBePaid + normalPay;
-       }
-       else{
-         System.out.println("Inconsistent data received Kindly try again");
-       }  
+       } 
     }
 
-    public double getSalary(){
-      return this.salaryToBePaid; 
+    public double getSalary(double salaryToBePaid){
+      ///this.salaryToBePaid= salaryToBePaid;
+            return this.salaryToBePaid; 
     }
     
      public static void main(String[] args) {
