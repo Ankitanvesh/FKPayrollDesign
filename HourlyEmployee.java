@@ -92,12 +92,6 @@ public class HourlyEmployee implements Employee  {
     }
     
      public static void main(String[] args) {
-        HourlyEmployee hr= new HourlyEmployee(5.0,1);
-        //hr.HourlyUpdate();
-       // System.out.println("hours "+ hr.hoursWorkedDuringDay);
-        //hr.DailyUpdate();
-        String s="abcd";
-        hr.updateSalary(4, s);
-        System.out.println(hr.hourlyRate + "  "+ hr.getSalary());
+        
     }
 }
