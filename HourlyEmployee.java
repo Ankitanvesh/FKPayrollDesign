@@ -5,12 +5,6 @@ import java.time.LocalDateTime;
 import java.io.*;
 //import Employee.java;
 
-interface Employee{
-  void Update();
-  void updateSalary(int a,String b);
-  double getSalary();
-  
-}
 
 
 public class HourlyEmployee implements Employee  {
