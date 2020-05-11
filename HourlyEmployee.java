@@ -21,7 +21,6 @@ public class HourlyEmployee implements Employee  {
     HourlyEmployee(double hourlyRate,int payType,int salaryToBePaid,int unionDues){
         //hoursWorkedDuringDay=0;
         this.hourlyRate= hourlyRate;
-        this.isUnionMember= false;
         this.unionDues= 0.0;
         this.payToBankAccount=false;
         this.payToPaymaster=false;

@@ -14,48 +14,50 @@ import org.json.simple.JSONObject;
 } */
 
 public class NewEmployee {
-    private String name;
-    private int empType;
-    private String postalAddress;
-    private String bankAccountDetails;
-    private String payStatement;
-    private int iD;
-    private String filename;
-    private double commisionRate=0.0;
-    private double hourlyRate=0.0;
-    private double monthlySalary=0.0;
-    private boolean isSalesEmployee=false;
-    private int payType;
-    private double salaryToBePaid=0.0;
-    private boolean isUnionMember=false;
-    private double unionDues=0.0;
-     
+        private int iD;
 
 
     public void call(int id) {
-        this.iD=id;
+
+        String name;
+        int empType;
+        String postalAddress;
+        String bankAccountDetails;
+        String payStatement;
+        
+        String filename;
+        double commisionRate=0.0;
+        double hourlyRate=0.0;
+        double monthlySalary=0.0;
+        boolean isSalesEmployee=false;
+        int payType;
+        double salaryToBePaid=0.0;
+        boolean isUnionMember=false;
+        double unionDues=0.0;
+        
+        iD=id;
         System.out.println("U will be required to submit information");
         Scanner sc = new Scanner(System.in);
         
         System.out.print("Enter your name : ");
-        this.name = sc.nextLine();
+        name = sc.nextLine();
         
         System.out.println();
         System.out.println("Enter your employee type based on the below choices");
         System.out.println("1> If you are an hourlyEmployee press 1");
         System.out.println("2> If you are an fixedSalaryEmployee press 2");
-        this.empType= sc.nextInt();
+        empType= sc.nextInt();
         
         
         System.out.println("1> If the employee prefers to be paid to his postal address press 1");
         System.out.println("2> If the employee prefers to be paid to his payMaster press 2");
         System.out.println("3> If the employee prefers to be paid to his bank account press 3");
-        this.payType=sc.nextInt();
+        payType=sc.nextInt();
         sc.nextLine();
 
-        if(this.empType==1){
+        if(empType==1){
             System.out.println("Enter hourly rate of employee");
-            this.hourlyRate=sc.nextDouble();
+            hourlyRate=sc.nextDouble();
             sc.nextLine();
              
             
@@ -63,14 +65,14 @@ public class NewEmployee {
         }
 
 
-        else if(this.empType==2){
+        else if(empType==2){
             System.out.println("Enter monthlySalary of employee");
-            this.monthlySalary=sc.nextDouble();
+            monthlySalary=sc.nextDouble();
             sc.nextLine();
             System.out.println("If the employee is a Sales Empoyee. Press 1.Else press 0");
             int comma = sc.nextInt();
             sc.nextLine();
-            this.hourlyRate=0.0;
+            hourlyRate=0.0;
             isSalesEmployee=false;
             if(comma==1){
                 isSalesEmployee=true;
@@ -80,19 +82,19 @@ public class NewEmployee {
             }
         }
         System.out.println("Enter your postal address ");
-        this.postalAddress = sc.nextLine();
+        postalAddress = sc.nextLine();
 
 
         System.out.println("Enter your Bank Account details ");
-        this.bankAccountDetails= sc.nextLine();
-        this.payStatement="";
+        bankAccountDetails= sc.nextLine();
+        payStatement="";
 
         System.out.println("Please wait while the system updates records");
         System.out.println(".");
         System.out.println(".");
         System.out.println(".");
         System.out.println(".");
-
+        String filename;
         if(empType==1)
         filename="DataBase/";
         else
@@ -113,19 +115,19 @@ public class NewEmployee {
 
 
           JSONObject jo= new JSONObject();
-          jo.put("Name", this.name); 
-        jo.put("Id", this.iD); 
-        jo.put("EmployeeType", this.empType); 
-        jo.put("PostalAddress",this.postalAddress);
-        jo.put("BankAccountDetails",this.bankAccountDetails);
+          jo.put("Name", name); 
+        jo.put("Id", iD); 
+        jo.put("EmployeeType", empType); 
+        jo.put("PostalAddress",postalAddress);
+        jo.put("BankAccountDetails",bankAccountDetails);
         jo.put("UnionJoiningDate","");
         jo.put("PayStatement","");
-        jo.put("SalaryToBePaid",this.salaryToBePaid);
-        jo.put("UnionDues",this.unionDues);
-        jo.put("isSalesEmployee",this.isSalesEmployee);
-        jo.put("MonthlySalary",this.monthlySalary);
-        jo.put("HourlySalary",this.hourlyRate);
-        jo.put("CommisionRate",this.commisionRate);
+        jo.put("SalaryToBePaid",salaryToBePaid);
+        jo.put("UnionDues",unionDues);
+        jo.put("isSalesEmployee",isSalesEmployee);
+        jo.put("MonthlySalary",monthlySalary);
+        jo.put("HourlySalary",hourlyRate);
+        jo.put("CommisionRate",commisionRate);
 
         
 
