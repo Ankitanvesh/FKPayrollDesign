@@ -56,6 +56,6 @@ In order to run the Appliaction The firm needs to follow the following steps:
 * All aspects of design covered have been mentioned in the commits leading
     to the completion of the part of project.
 *   To view the class diagram follow the steps below
-* [Link to viewer for UmlFiles](https://www.tutorialspoint.com/json_simple/json_simple_quick_guide.htm)
+* [Link to viewer for UmlFiles](https://app.diagrams.net/)
 * Then add the existing file ClassDiagram.drawio from your local directory
 and view its contents. 
