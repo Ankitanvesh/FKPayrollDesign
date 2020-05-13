@@ -52,3 +52,10 @@ In order to run the Appliaction The firm needs to follow the following steps:
 *  The PayRolling feature will be run at the end of every day and 
     update the due salaries for the employee and on appropriate days will pay the employee.           
 
+### Design Thinking 
+* All aspects of design covered have been mentioned in the commits leading
+    to the completion of the part of project.
+*   To view the class diagram follow the steps below
+* [Link to viewer for UmlFiles](https://www.tutorialspoint.com/json_simple/json_simple_quick_guide.htm)
+* Then add the existing file ClassDiagram.drawio from your local directory
+and view its contents. 
